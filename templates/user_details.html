@@ -8,12 +8,13 @@
     
 <br>
 <button> <a href="/users/{{user.id}}/edit">Edit</a> </button>
-<form action="/users/{{user.id}}/delete" method="POST"><button type="submit" value="">Delete</button></form>
+<form action="/users/{{user.id}}/delete" method="POST"><button type="submit">Delete</button></form>
 <br>
 <h2>Posts</h2>
 <ul>
 {% for post in posts %}
- <li> <a href="">{{post.title}}</a></li>
+ <li> <a href="/posts/{{post.id}}">{{post.title}}</a></li>
  {% endfor %}
 </ul>
+<button><a href="/users/{{user.id}}/posts/new">Add Post</a></button>
 {% endblock %}

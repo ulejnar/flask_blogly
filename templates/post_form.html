@@ -6,7 +6,7 @@
 <form method="POST">
     <p> Title <input name="Title"></p>
     <p> Content <input name="Content"></p>
-    <button>Cancel</button>
-    <button>Add</button>
+    <button><a href="/users/{{ user.id }}">Cancel</a></button>
+    <button type="submit">Add</button>
 </form>
 {% endblock %}

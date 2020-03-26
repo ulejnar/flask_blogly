@@ -66,16 +66,18 @@ def user_update(user_id):
 
 
 @app.route("/users/<int:user_id>/delete", methods=["POST"])
-def delete(user_id):
+def delete_user(user_id):
     user = User.query.get_or_404(user_id)
     db.session.delete(user)
     db.session.commit()
     return redirect("/users")
 
+
 @app.route("/users/<int:user_id>/posts/new")
 def new_post(user_id):
     user = User.query.get_or_404(user_id)
     return render_template("post_form.html", user=user)
+
 
 @app.route("/users/<int:user_id>/posts/new", methods=["POST"])
 def create_post(user_id):
@@ -87,3 +89,32 @@ def create_post(user_id):
     db.session.commit()
 
     return redirect(f"/users/{user_id}")
+
+
+@app.route("/posts/<int:post_id>")
+def post_information(post_id):
+    post = Post.query.get_or_404(post_id)
+    user = post.users
+    return render_template("post_details.html", post=post, user=user)
+
+
+@app.route("/posts/<int:post_id>/edit")
+def post_edit(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template("post_edit.html", post=post)
+
+
+@app.route("/posts/<int:post_id>/edit", methods=["POST"])
+def post_update(post_id):
+    post = Post.query.get_or_404(post_id)
+    post.title = request.form['Title'] 
+    post.content = request.form['Content']
+    db.session.commit()
+    return redirect(f"/posts/{post_id}")
+
+@app.route("/posts/<int:post_id>/delete", methods=["POST"])
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(f"/users/{post.user_id}")
