@@ -28,4 +28,4 @@ class User(db.Model):
                           unique=False)
     profile_img = db.Column(db.String,
                             nullable=True,
-                            unique=False)
+                            default='https://cdn.pixabay.com/photo/2014/08/27/12/58/penguins-429128_960_720.jpg')
